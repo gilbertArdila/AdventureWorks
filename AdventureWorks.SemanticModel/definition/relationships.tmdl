@@ -13,3 +13,18 @@ relationship dfdd1131-fa74-4b71-9a96-ca29c696c5f3
 	fromColumn: Compras.FechaVencimiento
 	toColumn: LocalDateTable_ab514205-8733-475b-b35d-0edd78eff833.Date
 
+relationship 2c91c046-d880-45a5-82d8-d4f789a779cc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Produccion.FechaInicio
+	toColumn: LocalDateTable_4497dbd2-02f5-4b1c-b050-fee2160dfd73.Date
+
+relationship f54183f2-b184-4fb9-88ea-4384d6c466a5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Produccion.FechaFin
+	toColumn: LocalDateTable_0e5cf930-e219-4138-b391-aff71e03b761.Date
+
+relationship b20baa79-f46e-4fec-805b-c6598ca9ebbf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Produccion.FechaVencimiento
+	toColumn: LocalDateTable_2abb061b-0634-4818-8e5a-d49d9243e1cd.Date
+
