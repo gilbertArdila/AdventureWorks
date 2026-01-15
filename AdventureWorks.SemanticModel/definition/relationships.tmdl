@@ -1,0 +1,15 @@
+relationship ff09655b-b683-46c3-80d4-35ef16fbb007
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Compras.FechaOrden
+	toColumn: LocalDateTable_8d82af92-fe2d-433d-a03c-7259a7823913.Date
+
+relationship bf64689c-cc13-4188-bf55-9f86c8025cf0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Compras.FechaEnvio
+	toColumn: LocalDateTable_5014aecc-5d0e-4b56-9918-5ff513cc05be.Date
+
+relationship dfdd1131-fa74-4b71-9a96-ca29c696c5f3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Compras.FechaVencimiento
+	toColumn: LocalDateTable_ab514205-8733-475b-b35d-0edd78eff833.Date
+

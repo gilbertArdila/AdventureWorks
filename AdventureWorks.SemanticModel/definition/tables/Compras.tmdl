@@ -1,0 +1,207 @@
+table Compras
+	lineageTag: 495d4967-68e6-4798-911e-46cbd21aa6f6
+
+	column OrdenID
+		dataType: string
+		lineageTag: df5792a1-3c5a-402f-820f-09ff92ebd0f6
+		summarizeBy: none
+		sourceColumn: OrdenID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaOrden
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c441706e-611c-4127-b76c-e3e9959345f6
+		summarizeBy: none
+		sourceColumn: FechaOrden
+
+		variation Variación
+			isDefault
+			relationship: ff09655b-b683-46c3-80d4-35ef16fbb007
+			defaultHierarchy: LocalDateTable_8d82af92-fe2d-433d-a03c-7259a7823913.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaEnvio
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2841d2c9-ac30-4e01-8b1d-66d773989617
+		summarizeBy: none
+		sourceColumn: FechaEnvio
+
+		variation Variación
+			isDefault
+			relationship: bf64689c-cc13-4188-bf55-9f86c8025cf0
+			defaultHierarchy: LocalDateTable_5014aecc-5d0e-4b56-9918-5ff513cc05be.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaVencimiento
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ee12b9eb-07dd-4db5-96c5-347011b41d60
+		summarizeBy: none
+		sourceColumn: FechaVencimiento
+
+		variation Variación
+			isDefault
+			relationship: dfdd1131-fa74-4b71-9a96-ca29c696c5f3
+			defaultHierarchy: LocalDateTable_ab514205-8733-475b-b35d-0edd78eff833.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ProductID
+		dataType: string
+		lineageTag: 16add62c-3592-45ed-9d39-dc345dbd1e2f
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descripcion
+		dataType: string
+		lineageTag: 4607f378-1c97-4a32-9fdc-9c76e832401c
+		summarizeBy: none
+		sourceColumn: Descripcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadPedida
+		dataType: int64
+		formatString: 0
+		lineageTag: 19579f90-9f44-4650-ab6f-23e6f2d1732e
+		summarizeBy: sum
+		sourceColumn: CantidadPedida
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadRecibida
+		dataType: double
+		lineageTag: 58c4dbf4-80e0-4057-b7e8-42d3b69e984c
+		summarizeBy: sum
+		sourceColumn: CantidadRecibida
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CantidadDevuelta
+		dataType: double
+		lineageTag: 624fd29c-e629-49f4-a34a-3e692f51772c
+		summarizeBy: sum
+		sourceColumn: CantidadDevuelta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrecioUnitario
+		dataType: double
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 859b2baa-07c2-47c8-ab56-da126b97da56
+		summarizeBy: sum
+		sourceColumn: PrecioUnitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column MontoTotal
+		dataType: double
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 013ed1cb-8124-4a91-a381-9de9964ef7e9
+		summarizeBy: sum
+		sourceColumn: MontoTotal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column ProveedorID
+		dataType: string
+		lineageTag: ab58bf1f-b7f1-4b9c-8267-fa95e084956b
+		summarizeBy: none
+		sourceColumn: ProveedorID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Proveedor
+		dataType: string
+		lineageTag: c8460852-d0c0-4055-83a4-47f07d0ffad6
+		summarizeBy: none
+		sourceColumn: Proveedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column AverageLeadTime
+		dataType: int64
+		formatString: 0
+		lineageTag: 86cd83c1-5a95-4b92-96d4-badbb4d48dac
+		summarizeBy: sum
+		sourceColumn: AverageLeadTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column Duracion
+		dataType: int64
+		formatString: 0
+		lineageTag: c38e57b3-5937-44ea-83c7-d7822449d5aa
+		summarizeBy: sum
+		sourceColumn: Duracion
+
+		annotation SummarizationSetBy = Automatic
+
+	column LeadTime
+		dataType: string
+		lineageTag: 00e604a0-1120-4006-a05e-df2ec5068b4c
+		summarizeBy: none
+		sourceColumn: LeadTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cumplimiento T entrega'
+		dataType: string
+		lineageTag: 516f02dd-2eae-49cc-b91b-451b2e8f33a7
+		summarizeBy: none
+		sourceColumn: Cumplimiento T entrega
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cumplimiento cantidad'
+		dataType: string
+		lineageTag: 3ac70b74-6dfe-4de8-bb32-4555bbc2ead8
+		summarizeBy: none
+		sourceColumn: Cumplimiento cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Compras = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Databases(".\SQLEXPRESS"),
+				    AdventureWorks2019 = Origen{[Name="AdventureWorks2019"]}[Data],
+				    dbo_Compras_PowerBI = AdventureWorks2019{[Schema="dbo",Item="Compras_PowerBI"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_Compras_PowerBI,{{"OrdenID", type text}, {"FechaOrden", type date}, {"FechaEnvio", type date}, {"FechaVencimiento", type date}, {"ProductID", type text}, {"PrecioUnitario", type number}, {"MontoTotal", type number}, {"ProveedorID", type text}}),
+				    #"Columna duracion" = Table.AddColumn(#"Tipo cambiado", "Duracion", each Duration.Days (Duration.From([FechaEnvio]-[FechaOrden]))),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Columna duracion",{{"Duracion", Int64.Type}}),
+				    #"Columna LeadTime" = Table.AddColumn(#"Tipo cambiado1", "LeadTime", each if [Duracion] < [AverageLeadTime] then "si" else "no"),
+				    #"Tipo cambiado2" = Table.TransformColumnTypes(#"Columna LeadTime",{{"LeadTime", type text}}),
+				    #"Columna Cumplimiento T entrega" = Table.AddColumn(#"Tipo cambiado2", "Cumplimiento T entrega", each if [FechaEnvio] <= [FechaVencimiento] then "si" else "no"),
+				    #"Tipo cambiado3" = Table.TransformColumnTypes(#"Columna Cumplimiento T entrega",{{"Cumplimiento T entrega", type text}}),
+				    #"Columna Cumplimiento cantidad" = Table.AddColumn(#"Tipo cambiado3", "Cumplimiento cantidad", each if [CantidadRecibida] = [CantidadPedida] then "si" else "no"),
+				    #"Tipo cambiado4" = Table.TransformColumnTypes(#"Columna Cumplimiento cantidad",{{"Cumplimiento cantidad", type text}})
+				in
+				    #"Tipo cambiado4"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

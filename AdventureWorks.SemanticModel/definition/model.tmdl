@@ -1,0 +1,22 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CO
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Compras"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Compras
+ref table DateTableTemplate_18a01540-aac6-4f29-95d0-8de6e1f33ab4
+ref table LocalDateTable_8d82af92-fe2d-433d-a03c-7259a7823913
+ref table LocalDateTable_5014aecc-5d0e-4b56-9918-5ff513cc05be
+ref table LocalDateTable_ab514205-8733-475b-b35d-0edd78eff833
+
+ref cultureInfo es-ES
+
