@@ -1,0 +1,91 @@
+table Inevntario
+	lineageTag: 522f80cd-f29c-4bd2-ac4a-2aff5e1059fe
+
+	column FcehaEntrada
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 19c26211-d667-4057-b097-4b3c81233949
+		summarizeBy: none
+		sourceColumn: FcehaEntrada
+
+		variation Variación
+			isDefault
+			relationship: b179e010-70fc-4c34-9e91-b073a80fb54a
+			defaultHierarchy: LocalDateTable_46f547a1-03ce-4394-bf51-2e960e03c0f3.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ProductID
+		dataType: string
+		lineageTag: cf9acd9d-3c3e-460d-945b-f220fae661b2
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column producto
+		dataType: string
+		lineageTag: f91c5572-c72b-49ba-bdd9-6a72ed3982c8
+		summarizeBy: none
+		sourceColumn: producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductModelID
+		dataType: string
+		lineageTag: 2fe184a2-60f6-4c50-ab24-3acb2f8b07e6
+		summarizeBy: none
+		sourceColumn: ProductModelID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductLine
+		dataType: string
+		lineageTag: d22fc9c6-f68f-4626-9f6d-058477796517
+		summarizeBy: none
+		sourceColumn: ProductLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationID
+		dataType: string
+		lineageTag: 9fbc618b-8bd0-4146-8eee-e8176a38b4c3
+		summarizeBy: none
+		sourceColumn: LocationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column location
+		dataType: string
+		lineageTag: 8e3d471d-e16d-4c2a-83a1-ef84a2df02fa
+		summarizeBy: none
+		sourceColumn: location
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f9cc08c-2f08-45e8-966d-abd64a986138
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Inevntario = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Databases(".\SQLEXPRESS"),
+				    AdventureWorks2019 = Origen{[Name="AdventureWorks2019"]}[Data],
+				    dbo_Inevntario_PowerBI = AdventureWorks2019{[Schema="dbo",Item="Inevntario_PowerBI"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_Inevntario_PowerBI,{{"FcehaEntrada", type date}, {"ProductID", type text}, {"ProductModelID", type text}, {"LocationID", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

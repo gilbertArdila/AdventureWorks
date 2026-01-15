@@ -1,0 +1,149 @@
+table Ventas
+	lineageTag: f826556a-1ec5-4c4f-a48b-965d5a1b30fa
+
+	column orderID
+		dataType: string
+		lineageTag: 040fa084-a624-4c2f-93a6-4945ad914e7c
+		summarizeBy: none
+		sourceColumn: orderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cantidad
+		dataType: int64
+		formatString: 0
+		lineageTag: 29f9545f-b766-446e-a41a-7f904bf69575
+		summarizeBy: sum
+		sourceColumn: Cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		lineageTag: e311fa7d-c9c5-442d-8944-b41cc2b5ad83
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column producto
+		dataType: string
+		lineageTag: 1ccea0b3-8244-4993-953e-04d963bda121
+		summarizeBy: none
+		sourceColumn: producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column precioUnitario
+		dataType: double
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: fe29d6b2-9c97-4086-86a6-edc8c30813ac
+		summarizeBy: sum
+		sourceColumn: precioUnitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column Descuento
+		dataType: double
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 10999c43-390e-491b-8c48-28e616c3b456
+		summarizeBy: sum
+		sourceColumn: Descuento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-CO"}
+
+	column Total
+		dataType: double
+		lineageTag: 51ae493f-c7e1-44c5-91cd-423dbe945d32
+		summarizeBy: sum
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Status
+		dataType: string
+		lineageTag: 96366ee7-418b-45ed-be46-92c5200558a4
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0d58af2f-e358-4477-aa74-3ea7636cca7b
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 0d9cd652-da30-4092-b280-bce77ad1597f
+			defaultHierarchy: LocalDateTable_cc0d64e3-3aa7-4aa2-8806-5714e13e26e8.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CustomerID
+		dataType: string
+		lineageTag: 3bf0e5bf-0d34-47c5-9103-9247d8a84fd4
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesPersonID
+		dataType: string
+		lineageTag: 6903a599-c596-4ede-acdf-f0506244361a
+		summarizeBy: none
+		sourceColumn: SalesPersonID
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendedor
+		dataType: string
+		lineageTag: 94544504-9362-43ce-8609-f7dd5ee812ed
+		summarizeBy: none
+		sourceColumn: vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: ebdb0e87-2e64-4536-a414-9305297b81bb
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryID
+		dataType: string
+		lineageTag: 841597d5-8771-45a1-8540-8cf55979005e
+		summarizeBy: none
+		sourceColumn: TerritoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Ventas = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Databases(".\SQLEXPRESS"),
+				    AdventureWorks2019 = Origen{[Name="AdventureWorks2019"]}[Data],
+				    dbo_Ventas_PowerBI = AdventureWorks2019{[Schema="dbo",Item="Ventas_PowerBI"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_Ventas_PowerBI,{{"orderID", type text}, {"ProductID", type text}, {"precioUnitario", type number}, {"Descuento", type number}, {"Fecha", type date}, {"Status", type text}, {"CustomerID", type text}, {"SalesPersonID", type text}, {"TerritoryID", type text}}),
+				    #"Valor reemplazado vendedor null" = Table.ReplaceValue(#"Tipo cambiado",null,"Corporativo",Replacer.ReplaceValue,{"vendedor"}),
+				    #"Valor reemplazado sales personID null" = Table.ReplaceValue(#"Valor reemplazado vendedor null",null,"000",Replacer.ReplaceValue,{"SalesPersonID"})
+				in
+				    #"Valor reemplazado sales personID null"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

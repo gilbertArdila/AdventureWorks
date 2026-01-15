@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Compras","Produccion"]
+annotation PBI_QueryOrder = ["Compras","Produccion","Inevntario","Ventas"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -21,6 +21,10 @@ ref table Produccion
 ref table LocalDateTable_4497dbd2-02f5-4b1c-b050-fee2160dfd73
 ref table LocalDateTable_0e5cf930-e219-4138-b391-aff71e03b761
 ref table LocalDateTable_2abb061b-0634-4818-8e5a-d49d9243e1cd
+ref table Inevntario
+ref table LocalDateTable_46f547a1-03ce-4394-bf51-2e960e03c0f3
+ref table Ventas
+ref table LocalDateTable_cc0d64e3-3aa7-4aa2-8806-5714e13e26e8
 
 ref cultureInfo es-ES
 

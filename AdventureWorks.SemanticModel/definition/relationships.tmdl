@@ -28,3 +28,13 @@ relationship b20baa79-f46e-4fec-805b-c6598ca9ebbf
 	fromColumn: Produccion.FechaVencimiento
 	toColumn: LocalDateTable_2abb061b-0634-4818-8e5a-d49d9243e1cd.Date
 
+relationship b179e010-70fc-4c34-9e91-b073a80fb54a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Inevntario.FcehaEntrada
+	toColumn: LocalDateTable_46f547a1-03ce-4394-bf51-2e960e03c0f3.Date
+
+relationship 0d9cd652-da30-4092-b280-bce77ad1597f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Ventas.Fecha
+	toColumn: LocalDateTable_cc0d64e3-3aa7-4aa2-8806-5714e13e26e8.Date
+
