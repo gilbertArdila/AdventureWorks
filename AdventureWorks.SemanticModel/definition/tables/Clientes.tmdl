@@ -1,0 +1,95 @@
+table Clientes
+	lineageTag: 6a2819fa-1905-4fcc-9599-6ff9e318945d
+
+	column BusinessEntityID
+		dataType: string
+		lineageTag: 1986156a-e54c-4115-b33f-28703e23b442
+		summarizeBy: none
+		sourceColumn: BusinessEntityID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: ce4a05c8-fde8-4329-9315-c620ac2c66a0
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhoneNumberType
+		dataType: string
+		lineageTag: 6315e791-322c-4050-8cfc-49812d7cecd4
+		summarizeBy: none
+		sourceColumn: PhoneNumberType
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		lineageTag: 43fe40a8-1d47-461b-8ca8-448d9c2e4837
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailPromotion
+		dataType: int64
+		formatString: 0
+		lineageTag: 703120f2-bb02-4448-9d57-f95d962ed256
+		summarizeBy: sum
+		sourceColumn: EmailPromotion
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 8b4fa88f-a215-48d1-be3e-eb5d0f547c6b
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado
+		dataType: string
+		lineageTag: 815925b3-7a1a-4828-b3a2-25fee85168d2
+		summarizeBy: none
+		sourceColumn: Estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryRegionName
+		dataType: string
+		lineageTag: f0adb602-588e-4d0f-bd2d-145f1279e5a4
+		summarizeBy: none
+		sourceColumn: CountryRegionName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Clente
+		dataType: string
+		lineageTag: 855c9e6c-b14f-4878-a963-c13b664ec279
+		summarizeBy: none
+		sourceColumn: Clente
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Clientes = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Databases(".\SQLEXPRESS"),
+				    AdventureWorks2019 = Origen{[Name="AdventureWorks2019"]}[Data],
+				    Sales_vIndividualCustomer = AdventureWorks2019{[Schema="Sales",Item="vIndividualCustomer"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Sales_vIndividualCustomer,{{"BusinessEntityID", type text}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Title", "MiddleName", "Suffix", "AddressType", "AddressLine1", "AddressLine2"}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Columnas quitadas",{{"StateProvinceName", "Estado"}}),
+				    #"Columnas quitadas1" = Table.RemoveColumns(#"Columnas con nombre cambiado",{"PostalCode", "Demographics"}),
+				    #"Columnas combinadas clente" = Table.CombineColumns(#"Columnas quitadas1",{"FirstName", "LastName"},Combiner.CombineTextByDelimiter(" ", QuoteStyle.None),"Clente")
+				in
+				    #"Columnas combinadas clente"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

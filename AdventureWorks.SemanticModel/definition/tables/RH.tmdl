@@ -1,0 +1,171 @@
+table RH
+	lineageTag: e32fed81-eb41-4dac-b5df-488f30251b3a
+
+	column BusinessEntityID
+		dataType: string
+		lineageTag: 8bd25172-f03c-434b-833f-52f9c49f0455
+		summarizeBy: none
+		sourceColumn: BusinessEntityID
+
+		annotation SummarizationSetBy = Automatic
+
+	column fechaContrato
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a25cd09a-a02f-4dc9-824f-596b42c7e31d
+		summarizeBy: none
+		sourceColumn: fechaContrato
+
+		variation Variación
+			isDefault
+			relationship: b9fb38e0-120d-4391-9338-ed681f664961
+			defaultHierarchy: LocalDateTable_deb36afb-cb9e-4d8b-9de4-4b9f283643ef.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column finContrato
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0dcfa07a-0820-4f9b-9365-246ccedecc76
+		summarizeBy: none
+		sourceColumn: finContrato
+
+		variation Variación
+			isDefault
+			relationship: d0b80f72-29a4-49d8-8170-ac6855b6f179
+			defaultHierarchy: LocalDateTable_4c3a2388-bdc9-4f31-a7fa-d6b9001af1a1.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Gerencia
+		dataType: string
+		lineageTag: d783c7b6-1cc3-4ba5-98c7-d1baf77b0646
+		summarizeBy: none
+		sourceColumn: Gerencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Departamento
+		dataType: string
+		lineageTag: 194cb5b1-6dad-49d0-b491-cfc943ca4eb9
+		summarizeBy: none
+		sourceColumn: Departamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Empleado
+		dataType: string
+		lineageTag: cdbfeeab-2f1e-4534-bdae-d82954d1e4f2
+		summarizeBy: none
+		sourceColumn: Empleado
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cargo
+		dataType: string
+		lineageTag: 5aa29eb3-76d7-411f-8878-8538df84182a
+		summarizeBy: none
+		sourceColumn: Cargo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: d85161e8-b26e-4462-a4ee-e6b6559efea0
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaritalStatus
+		dataType: string
+		lineageTag: 11c005bf-1e59-41f0-a851-4ce4fa0cabf4
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column BirthDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b930eca4-19d0-45b9-989a-30ddee3a52df
+		summarizeBy: none
+		sourceColumn: BirthDate
+
+		variation Variación
+			isDefault
+			relationship: 8151d411-f63c-41b3-a92f-5bb2bd4032d2
+			defaultHierarchy: LocalDateTable_e43a2367-44c4-4d8d-9f80-91282322cf55.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Activo
+		dataType: string
+		lineageTag: a66957ea-2716-4394-8c4a-6192853027b1
+		summarizeBy: none
+		sourceColumn: Activo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Genero
+		dataType: string
+		lineageTag: 2036ae6c-1ecf-4fa9-80fb-663ad4facd75
+		summarizeBy: none
+		sourceColumn: Genero
+
+		annotation SummarizationSetBy = Automatic
+
+	column Edad
+		dataType: double
+		lineageTag: f91c4e67-7844-4aac-bc13-6bb8654fdf22
+		summarizeBy: sum
+		sourceColumn: Edad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Antiguedad
+		dataType: double
+		lineageTag: c4d7dcb4-cf04-4881-a608-0c528dc3ab37
+		summarizeBy: sum
+		sourceColumn: Antiguedad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition RH = m
+		mode: import
+		source = ```
+				let
+				    Origen = Sql.Databases(".\SQLEXPRESS"),
+				    AdventureWorks2019 = Origen{[Name="AdventureWorks2019"]}[Data],
+				    dbo_RH_PowerBI = AdventureWorks2019{[Schema="dbo",Item="RH_PowerBI"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_RH_PowerBI,{{"BusinessEntityID", type text}, {"fechaContrato", type date}, {"finContrato", type date}}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Tipo cambiado",{{"NombreEmpleado", "Empleado"}, {"JobTitle", "Cargo"}}),
+				    #"Columna Activo" = Table.AddColumn(#"Columnas con nombre cambiado", "Actico", each if [finContrato] = null then "si" else "no"),
+				    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Columna Activo",{{"Actico", "Activo"}}),
+				    #"Columna Genero" = Table.AddColumn(#"Columnas con nombre cambiado1", "Genero", each if [Gender] = "M" then "Masculino" else if [Gender] = "F" then "Femenino" else "Otro"),
+				    #"Columna Edad" = Table.AddColumn(#"Columna Genero", "Edad", each (Duration.Days(Duration.From(Date.From(DateTime.LocalNow())-[BirthDate]))/30)/12),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Columna Edad",{{"Edad", type number}}),
+				    #"Columna Antiguedad" = Table.AddColumn(#"Tipo cambiado1", "Antiguedad", each if [Activo] = "si" then 
+				(Duration.Days(Duration.From(Date.From(DateTime.LocalNow())
+				- [fechaContrato]))/30
+				)/12 
+				else (Duration.Days(Duration.From([finContrato] - [fechaContrato]))/30)/12),
+				    #"Tipo cambiado2" = Table.TransformColumnTypes(#"Columna Antiguedad",{{"Antiguedad", type number}})
+				in
+				    #"Tipo cambiado2"
+				```
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
