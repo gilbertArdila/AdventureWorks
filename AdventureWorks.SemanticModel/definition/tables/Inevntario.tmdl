@@ -8,11 +8,6 @@ table Inevntario
 		summarizeBy: none
 		sourceColumn: FcehaEntrada
 
-		variation Variación
-			isDefault
-			relationship: b179e010-70fc-4c34-9e91-b073a80fb54a
-			defaultHierarchy: LocalDateTable_46f547a1-03ce-4394-bf51-2e960e03c0f3.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

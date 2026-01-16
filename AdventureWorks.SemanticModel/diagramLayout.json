@@ -14,11 +14,12 @@
             "y": 0
           },
           "nodeIndex": "Compras",
+          "nodeLineageTag": "495d4967-68e6-4798-911e-46cbd21aa6f6",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
@@ -31,7 +32,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
@@ -43,7 +44,7 @@
             "height": 272,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
@@ -55,36 +56,38 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 1420,
-            "y": 0
+            "x": 709.78328015559475,
+            "y": 527.94871209672579
           },
           "nodeIndex": "Clientes",
+          "nodeLineageTag": "6a2819fa-1905-4fcc-9599-6ff9e318945d",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 8
         },
         {
           "location": {
-            "x": 1136,
-            "y": 0
+            "x": 0,
+            "y": 363.27899475227088
           },
           "nodeIndex": "RH",
+          "nodeLineageTag": "e32fed81-eb41-4dac-b5df-488f30251b3a",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 6
         },
         {
           "location": {
-            "x": 1704,
-            "y": 62
+            "x": 391.67034421671008,
+            "y": 388.82539320273503
           },
           "nodeIndex": "Calendario",
           "nodeLineageTag": "94036249-b895-4f7f-bd34-68544e016078",
@@ -92,12 +95,12 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 7
         },
         {
           "location": {
-            "x": 1988,
-            "y": 98
+            "x": 348.84498937520385,
+            "y": 630.97679506907559
           },
           "nodeIndex": "Update",
           "nodeLineageTag": "50c20e4c-59f2-4bbc-b840-391bf708a101",
@@ -105,11 +108,11 @@
             "height": 104,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 5
         }
       ],
       "name": "Todas las tablas",
-      "zoomValue": 100,
+      "zoomValue": 79.553182037699813,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

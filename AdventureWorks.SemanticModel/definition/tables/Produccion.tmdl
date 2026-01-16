@@ -16,11 +16,6 @@ table Produccion
 		summarizeBy: none
 		sourceColumn: FechaInicio
 
-		variation Variación
-			isDefault
-			relationship: 2c91c046-d880-45a5-82d8-d4f789a779cc
-			defaultHierarchy: LocalDateTable_4497dbd2-02f5-4b1c-b050-fee2160dfd73.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

@@ -81,11 +81,6 @@ table Ventas
 		summarizeBy: none
 		sourceColumn: Fecha
 
-		variation Variación
-			isDefault
-			relationship: 0d9cd652-da30-4092-b280-bce77ad1597f
-			defaultHierarchy: LocalDateTable_cc0d64e3-3aa7-4aa2-8806-5714e13e26e8.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

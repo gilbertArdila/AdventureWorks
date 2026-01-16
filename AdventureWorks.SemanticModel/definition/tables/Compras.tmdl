@@ -16,11 +16,6 @@ table Compras
 		summarizeBy: none
 		sourceColumn: FechaOrden
 
-		variation Variación
-			isDefault
-			relationship: ff09655b-b683-46c3-80d4-35ef16fbb007
-			defaultHierarchy: LocalDateTable_8d82af92-fe2d-433d-a03c-7259a7823913.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

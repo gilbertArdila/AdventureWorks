@@ -1,8 +1,3 @@
-relationship ff09655b-b683-46c3-80d4-35ef16fbb007
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Compras.FechaOrden
-	toColumn: LocalDateTable_8d82af92-fe2d-433d-a03c-7259a7823913.Date
-
 relationship bf64689c-cc13-4188-bf55-9f86c8025cf0
 	joinOnDateBehavior: datePartOnly
 	fromColumn: Compras.FechaEnvio
@@ -13,11 +8,6 @@ relationship dfdd1131-fa74-4b71-9a96-ca29c696c5f3
 	fromColumn: Compras.FechaVencimiento
 	toColumn: LocalDateTable_ab514205-8733-475b-b35d-0edd78eff833.Date
 
-relationship 2c91c046-d880-45a5-82d8-d4f789a779cc
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Produccion.FechaInicio
-	toColumn: LocalDateTable_4497dbd2-02f5-4b1c-b050-fee2160dfd73.Date
-
 relationship f54183f2-b184-4fb9-88ea-4384d6c466a5
 	joinOnDateBehavior: datePartOnly
 	fromColumn: Produccion.FechaFin
@@ -27,21 +17,6 @@ relationship b20baa79-f46e-4fec-805b-c6598ca9ebbf
 	joinOnDateBehavior: datePartOnly
 	fromColumn: Produccion.FechaVencimiento
 	toColumn: LocalDateTable_2abb061b-0634-4818-8e5a-d49d9243e1cd.Date
-
-relationship b179e010-70fc-4c34-9e91-b073a80fb54a
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Inevntario.FcehaEntrada
-	toColumn: LocalDateTable_46f547a1-03ce-4394-bf51-2e960e03c0f3.Date
-
-relationship 0d9cd652-da30-4092-b280-bce77ad1597f
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Ventas.Fecha
-	toColumn: LocalDateTable_cc0d64e3-3aa7-4aa2-8806-5714e13e26e8.Date
-
-relationship b9fb38e0-120d-4391-9338-ed681f664961
-	joinOnDateBehavior: datePartOnly
-	fromColumn: RH.fechaContrato
-	toColumn: LocalDateTable_deb36afb-cb9e-4d8b-9de4-4b9f283643ef.Date
 
 relationship d0b80f72-29a4-49d8-8170-ac6855b6f179
 	joinOnDateBehavior: datePartOnly
@@ -57,4 +32,24 @@ relationship ddf403fe-f95e-4895-8ce1-e20b414dd7c2
 	joinOnDateBehavior: datePartOnly
 	fromColumn: Calendario.Fecha
 	toColumn: LocalDateTable_4a740314-3b72-4d0d-a14d-28082ffdaa4e.Date
+
+relationship 9bb62c30-b0b1-6d8b-afeb-488ae4d3d2ea
+	fromColumn: Compras.FechaOrden
+	toColumn: Calendario.Fecha
+
+relationship 8602b486-bf1f-baa2-5d63-4d7c5da70a54
+	fromColumn: Produccion.FechaInicio
+	toColumn: Calendario.Fecha
+
+relationship cf1e39ea-9485-4c68-fdec-38be94064395
+	fromColumn: Ventas.Fecha
+	toColumn: Calendario.Fecha
+
+relationship 36cfc103-52fd-4263-e4c7-7ec66443d595
+	fromColumn: Inevntario.FcehaEntrada
+	toColumn: Calendario.Fecha
+
+relationship fd2f2f41-4382-c0b0-7042-8ef3d209a9dd
+	fromColumn: RH.fechaContrato
+	toColumn: Calendario.Fecha
 

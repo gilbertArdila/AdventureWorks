@@ -16,11 +16,6 @@ table RH
 		summarizeBy: none
 		sourceColumn: fechaContrato
 
-		variation Variación
-			isDefault
-			relationship: b9fb38e0-120d-4391-9338-ed681f664961
-			defaultHierarchy: LocalDateTable_deb36afb-cb9e-4d8b-9de4-4b9f283643ef.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
