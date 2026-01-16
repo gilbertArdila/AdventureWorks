@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Compras","Produccion","Inevntario","Ventas","Clientes","RH"]
+annotation PBI_QueryOrder = ["Compras","Produccion","Inevntario","Ventas","Clientes","RH","Update","Calendario"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -30,6 +30,9 @@ ref table RH
 ref table LocalDateTable_deb36afb-cb9e-4d8b-9de4-4b9f283643ef
 ref table LocalDateTable_4c3a2388-bdc9-4f31-a7fa-d6b9001af1a1
 ref table LocalDateTable_e43a2367-44c4-4d8d-9f80-91282322cf55
+ref table Update
+ref table Calendario
+ref table LocalDateTable_4a740314-3b72-4d0d-a14d-28082ffdaa4e
 
 ref cultureInfo es-ES
 

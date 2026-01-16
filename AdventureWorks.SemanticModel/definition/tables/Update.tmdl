@@ -1,0 +1,25 @@
+table Update
+	lineageTag: 50c20e4c-59f2-4bbc-b840-391bf708a101
+
+	column Actualizado
+		dataType: string
+		lineageTag: 8eb06658-680f-436f-a1b2-cc22f4efed1a
+		summarizeBy: none
+		sourceColumn: Actualizado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Update = m
+		mode: import
+		source =
+				let
+				    Origen = DateTime.LocalNow(),
+				    #"Convertida en tabla" = #table(1, {{Origen}}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Convertida en tabla",{{"Column1", "Actualizado"}})
+				in
+				    #"Columnas con nombre cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

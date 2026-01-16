@@ -1,0 +1,93 @@
+table Calendario
+	lineageTag: 94036249-b895-4f7f-bd34-68544e016078
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b92dec08-5601-4302-a866-c89ac0b88e79
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: ddf403fe-f95e-4895-8ce1-e20b414dd7c2
+			defaultHierarchy: LocalDateTable_4a740314-3b72-4d0d-a14d-28082ffdaa4e.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Dia semana'
+		dataType: string
+		lineageTag: 43970f51-bd81-462b-8b21-81e34f5b1b30
+		summarizeBy: none
+		sourceColumn: Dia semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia de la semana'
+		dataType: int64
+		formatString: 0
+		lineageTag: 97272485-2b9f-44e4-ba99-a6dda12ea103
+		summarizeBy: sum
+		sourceColumn: Dia de la semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoMes
+		dataType: string
+		lineageTag: 5afaf14f-0336-483a-a0f5-ae88e674c648
+		summarizeBy: none
+		sourceColumn: AñoMes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = m
+		mode: import
+		source =
+				let
+				
+				  //Get Max and Min date from oders table
+				
+				  //MaxDate=(Date.From(DateTime.LocalNow())),
+				
+				  //MaxDate=List.Max(Inventario_Power_BI[FechaEntrada]),
+				
+				  MaxDate=Date.FromText("2014/12/31"),
+				
+				  MinDate=List.Min(RH[fechaContrato]),
+				
+				  //MinDate=Date.FromText("2021/01/01"),
+				
+				  NoDays= Number.From(MaxDate-MinDate)+1,
+				
+				  Origen = List.Dates(MinDate, NoDays, #duration(1, 0, 0, 0)),
+				
+				  #"Convertida en tabla" = Table.FromList(Origen, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				
+				  #"Columnas con nombre cambiado" = Table.RenameColumns(#"Convertida en tabla",{{"Column1", "Fecha"}}),
+				
+				  #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"Fecha", type date}}),
+				
+				  #"Columna duplicada" = Table.DuplicateColumn(#"Tipo cambiado", "Fecha", "Fecha - Copia"),
+				
+				  #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Columna duplicada",{{"Fecha - Copia", "Dia semana"}}),
+				
+				  #"Nombre del dia extraido" = Table.TransformColumns(#"Columnas con nombre cambiado1", {{"Dia semana", each Date.DayOfWeekName(_), type text}}),
+				
+				  #"Dia de la semana insertado" = Table.AddColumn(#"Nombre del dia extraido", "Dia de la semana", each Date.DayOfWeek([Fecha]), Int64.Type),
+				
+				  #"Nombre del mes insertado" = Table.AddColumn(#"Dia de la semana insertado", "Nombre del mes", each Date.MonthName([Fecha]), type text),
+				
+				  #"Año insertado" = Table.AddColumn(#"Nombre del mes insertado", "Año", each Date.Year([Fecha]), Int64.Type),
+				
+				  #"Columnas combinadas" = Table.CombineColumns(Table.TransformColumnTypes(#"Año insertado", {{"Año", type text}}, "es-419"),{"Nombre del mes", "Año"},Combiner.CombineTextByDelimiter("", QuoteStyle.None),"AñoMes")
+				
+				in
+				
+				  #"Columnas combinadas"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

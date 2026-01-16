@@ -53,3 +53,8 @@ relationship 8151d411-f63c-41b3-a92f-5bb2bd4032d2
 	fromColumn: RH.BirthDate
 	toColumn: LocalDateTable_e43a2367-44c4-4d8d-9f80-91282322cf55.Date
 
+relationship ddf403fe-f95e-4895-8ce1-e20b414dd7c2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.Fecha
+	toColumn: LocalDateTable_4a740314-3b72-4d0d-a14d-28082ffdaa4e.Date
+
