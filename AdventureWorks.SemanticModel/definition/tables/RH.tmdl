@@ -1,6 +1,50 @@
 table RH
 	lineageTag: e32fed81-eb41-4dac-b5df-488f30251b3a
 
+	measure Contrataciones = COUNTROWS(RH)
+		formatString: 0
+		lineageTag: 63ff36c4-8922-48d0-a90d-0c6c6fab49c3
+
+	measure 'Trabajadores activos' = CALCULATE([Contrataciones], FILTER(RH, RH[Activo] = "si"))
+		formatString: 0
+		lineageTag: 20bc7d20-ff3c-4680-b9aa-762cd826c8b3
+
+	measure 'Antiguedad promedio activos' = CALCULATE(AVERAGE(RH[Antiguedad]),RH, RH[Activo] ="si")
+		formatString: 0.0
+		lineageTag: 2aaaff0d-2252-4e70-9715-4a92deb03701
+
+	measure 'Antiguedad promedio retirados' = CALCULATE(AVERAGE(RH[Antiguedad]),RH, RH[Activo] ="no")
+		formatString: 0.0
+		lineageTag: 569de7f1-5527-4fe2-b856-92ab9c88741f
+
+	measure 'Trabajadores retirados' = CALCULATE([Contrataciones], FILTER(RH, RH[Activo] = "no"))
+		formatString: 0
+		lineageTag: 3bed0cbd-f961-433d-868d-cc9d1767e25d
+
+	measure 'Total acumulado de Contrataciones en fechaContrato' =
+			
+			CALCULATE(
+				[Contrataciones],
+				FILTER(
+					ALLSELECTED('RH'[fechaContrato]),
+					ISONORAFTER('RH'[fechaContrato], MAX('RH'[fechaContrato]), DESC)
+				)
+			)
+		formatString: 0
+		lineageTag: 6c6be6e9-87b2-4039-bd95-82bf530af416
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "RunningTotal"
+				}
+
+		changedProperty = FormatString
+
+	measure 'Rotacion de personal' = [Trabajadores retirados] / (([Contrataciones]+[Total acumulado de Contrataciones en fechaContrato])/2)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 3575f005-19e1-430d-aa84-a8b1774208f3
+
 	column BusinessEntityID
 		dataType: string
 		lineageTag: 8bd25172-f03c-434b-833f-52f9c49f0455
@@ -135,6 +179,21 @@ table RH
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Grupo etario' = ```
+			SWITCH( TRUE(),
+			RH[Edad] <=30, "30 o menos",
+			RH[Edad] <=40, "31-40",
+			RH[Edad] <=50, "41-50",
+			RH[Edad] <=60, "51-60",
+			RH[Edad] >60, "60 o más")
+			
+			
+			```
+		lineageTag: 01936e53-87fd-4939-bcce-7cf04014f2cb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
 
 	partition RH = m
 		mode: import

@@ -1,6 +1,46 @@
 table Ventas
 	lineageTag: f826556a-1ec5-4c4f-a48b-965d5a1b30fa
 
+	measure 'Total de ventas' = ```
+			SUM( Ventas[Total]) 
+			```
+		lineageTag: 0d7f7d67-db1d-40fb-8b1e-2456f2d4b21a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Transacciones = ```
+			DISTINCTCOUNT(Ventas[orderID]) 
+			```
+		formatString: 0
+		lineageTag: f0f26fd2-b855-462c-a12f-bfdc0570a4c6
+
+	measure 'Cantidad vendida' = ```
+			SUM(Ventas[Cantidad]) 
+			```
+		formatString: 0
+		lineageTag: b0854d88-062d-481d-aad0-abcf6d657735
+
+	measure 'Venta media' = DIVIDE(Ventas[Total de ventas], Ventas[Transacciones],0)
+		lineageTag: e0460117-b532-482e-9366-cd4b66056514
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cantidad media' = DIVIDE( [Cantidad producida], Ventas[Transacciones], 0)
+		lineageTag: 5e913513-3aea-4c19-9112-e75888963f49
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rotacion mensual' = DIVIDE([Cantidad vendida], DISTINCTCOUNT( Calendario[AñoMes]),0)
+		lineageTag: a1c00dad-c3b9-4b66-a038-12039126d483
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Clientes que compraron' = ```
+			DISTINCTCOUNT( Ventas[CustomerID]) 
+			```
+		formatString: 0
+		lineageTag: 5267b1fc-6a4c-458b-b399-bc97a5d769ec
+
 	column orderID
 		dataType: string
 		lineageTag: 040fa084-a624-4c2f-93a6-4945ad914e7c

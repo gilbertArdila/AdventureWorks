@@ -1,6 +1,48 @@
 table Produccion
 	lineageTag: a6738b4f-d5c5-4600-bce6-d2f158959ea6
 
+	measure 'Cantidad producida' = SUM(Produccion[cantidad])
+		formatString: #,0
+		lineageTag: e6de6d9d-5ef1-4a2d-8d29-6f6daaf4ccc5
+
+	measure 'Categorias de productos' = DISTINCTCOUNT( Produccion[ProductModelID])
+		formatString: 0
+		lineageTag: 88d31f3e-c47d-4fc0-845e-c5c9a1287b31
+
+	measure 'Costo de produccion' = SUM(Produccion[CostoStandard])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 660089cf-8a7b-4d0a-a8a6-45d949a6dda2
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Locaciones de fabrica' = ```
+			DISTINCTCOUNT(Produccion[LocationID]) 
+			```
+		formatString: 0
+		lineageTag: c9c42bb9-19a6-4bc7-a0f1-33cd5dd4471c
+
+	measure 'Productos terminados' = SUM(Produccion[almacenado])
+		formatString: #,0
+		lineageTag: 3c5e6c4a-a1a8-470e-9098-6c1e36fb2581
+
+	measure 'Productos en proceso' = [Cantidad producida] - Produccion[Productos terminados]
+		formatString: #,0
+		lineageTag: 02698194-8731-482e-b5d1-9030917a6dfb
+
+	measure 'Valor de produccion' = SUM(Produccion[precioLista])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 02b392fc-b3a2-4b47-ab24-ae5bf33808a0
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Rentabilidad esperada' = 1-DIVIDE( [Costo de produccion], [Valor de produccion], 0)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: a954e289-8f86-4915-a85f-7103d08a7e97
+
+	measure 'Variedad de productos' = DISTINCTCOUNT( Produccion[ProductID])
+		formatString: 0
+		lineageTag: 1102245a-6cc1-4b55-9342-b495a137feef
+
 	column WorkOrderID
 		dataType: string
 		lineageTag: cc2d0454-b856-4edd-9260-b9451cb31816

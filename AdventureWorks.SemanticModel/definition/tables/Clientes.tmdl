@@ -1,6 +1,10 @@
 table Clientes
 	lineageTag: 6a2819fa-1905-4fcc-9599-6ff9e318945d
 
+	measure 'Clientes registrados' = DISTINCTCOUNT(Clientes[BusinessEntityID])
+		formatString: 0
+		lineageTag: 86167884-4a3b-4e2c-a6fd-a41805521e52
+
 	column BusinessEntityID
 		dataType: string
 		lineageTag: 1986156a-e54c-4115-b33f-28703e23b442

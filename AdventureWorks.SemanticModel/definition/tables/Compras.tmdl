@@ -1,6 +1,52 @@
 table Compras
 	lineageTag: 495d4967-68e6-4798-911e-46cbd21aa6f6
 
+	measure 'orden de compra' = DISTINCTCOUNT( Compras[OrdenID])
+		formatString: #,0
+		lineageTag: f273073b-b647-408a-a6a9-137eaac9f61f
+
+	measure 'Monto pagado' = SUM(Compras[MontoTotal])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 3f9ad926-014e-482a-aafd-80f8ddf1da89
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure OnTime = CALCULATE(Compras[orden de compra], FILTER(Compras, Compras[Cumplimiento T entrega] = "si"))/ Compras[orden de compra]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: eaf45900-4d5e-4393-aabd-70220c5c4391
+
+	measure inFull = CALCULATE(Compras[orden de compra], FILTER(Compras, Compras[Cumplimiento cantidad] = "si"))/Compras[orden de compra]
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 78275433-98e9-4f9f-959f-156d75d01a8d
+
+	measure OTIF = [OnTime] * [inFull]
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 67687d6d-283a-498e-a3bf-b12541df9396
+
+	measure 'Promedio mensual monto' = DIVIDE([Monto pagado], DISTINCTCOUNT(Calendario[AñoMes]), 0)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 5d6f4e25-6a25-4d75-abd2-294174104e43
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Cumplimientod LeadTime' = CALCULATE([orden de compra], FILTER(Compras, Compras[LeadTime] = "si"))/ Compras[orden de compra]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 03c8eb9d-8888-46cf-b54c-909c36c652c5
+
+	measure 'Cantidad devuelta' = SUM(Compras[CantidadDevuelta])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 399e3f4f-abd9-438c-a071-fa4d47a5c6da
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Variacion cantidad' = ```
+			SUM(Compras[CantidadPedida]) - SUM( Compras[CantidadRecibida]) 
+			```
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 92e55139-cf9f-4338-9587-e646507270c3
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
 	column OrdenID
 		dataType: string
 		lineageTag: df5792a1-3c5a-402f-820f-09ff92ebd0f6
