@@ -37,6 +37,17 @@
           "type": "BaseTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "logo+adventureworks2442437563199613.png",
+          "path": "logo+adventureworks2442437563199613.png",
+          "type": "Image"
+        }
+      ]
     }
   ],
   "settings": {

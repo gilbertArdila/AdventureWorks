@@ -42,10 +42,10 @@ table Compras
 	measure 'Variacion cantidad' = ```
 			SUM(Compras[CantidadPedida]) - SUM( Compras[CantidadRecibida]) 
 			```
-		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		formatString: 0
 		lineageTag: 92e55139-cf9f-4338-9587-e646507270c3
 
-		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	column OrdenID
 		dataType: string
@@ -125,23 +125,25 @@ table Compras
 
 	column CantidadRecibida
 		dataType: double
+		formatString: 0
 		lineageTag: 58c4dbf4-80e0-4057-b7e8-42d3b69e984c
 		summarizeBy: sum
 		sourceColumn: CantidadRecibida
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	column CantidadDevuelta
 		dataType: double
+		formatString: 0
 		lineageTag: 624fd29c-e629-49f4-a34a-3e692f51772c
 		summarizeBy: sum
 		sourceColumn: CantidadDevuelta
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	column PrecioUnitario
 		dataType: double
