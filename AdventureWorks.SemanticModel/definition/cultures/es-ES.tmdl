@@ -2383,7 +2383,7 @@ cultureInfo es-ES
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Produccion",
-			          "ConceptualProperty": "ProductModel"
+			          "ConceptualProperty": "Categorias"
 			        }
 			      },
 			      "State": "Generated",
@@ -2504,6 +2504,16 @@ cultureInfo es-ES
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "Categorias": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]

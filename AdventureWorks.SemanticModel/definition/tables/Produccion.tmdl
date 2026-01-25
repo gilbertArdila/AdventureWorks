@@ -134,11 +134,11 @@ table Produccion
 
 		annotation SummarizationSetBy = Automatic
 
-	column ProductModel
+	column Categorias
 		dataType: string
 		lineageTag: a3ac03b9-3310-41a3-9a51-2188da2a6b31
 		summarizeBy: none
-		sourceColumn: ProductModel
+		sourceColumn: Categorias
 
 		annotation SummarizationSetBy = Automatic
 
@@ -187,9 +187,10 @@ table Produccion
 				    Origen = Sql.Databases(".\SQLEXPRESS"),
 				    AdventureWorks2019 = Origen{[Name="AdventureWorks2019"]}[Data],
 				    dbo_Produccion_PowerBI = AdventureWorks2019{[Schema="dbo",Item="Produccion_PowerBI"]}[Data],
-				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_Produccion_PowerBI,{{"FechaInicio", type date}, {"FechaFin", type date}, {"FechaVencimiento", type date}, {"LocationID", type text}, {"WorkOrderID", type text}, {"ProductID", type text}, {"ProductModelID", type text}, {"CostoStandard", type number}, {"precioLista", type number}})
+				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_Produccion_PowerBI,{{"FechaInicio", type date}, {"FechaFin", type date}, {"FechaVencimiento", type date}, {"LocationID", type text}, {"WorkOrderID", type text}, {"ProductID", type text}, {"ProductModelID", type text}, {"CostoStandard", type number}, {"precioLista", type number}}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Tipo cambiado",{{"ProductModel", "Categorias"}})
 				in
-				    #"Tipo cambiado"
+				    #"Columnas con nombre cambiado"
 
 	annotation PBI_NavigationStepName = Navegación
 
